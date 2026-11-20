@@ -1,0 +1,68 @@
+{
+  "brand": "Kolkata Weekend Concierge",
+  "networks": [
+    {
+      "name": "kolkata_concierge",
+      "front_man": "concierge_coordinator",
+      "hocon": "./kolkata_concierge.network.json",
+      "description": "Plan a 1-2 day Kolkata trip: heritage places, Bengali food and easy transport.",
+      "tags": [
+        "deployed",
+        "nsdeploy"
+      ],
+      "sample_queries": [
+        "I have 2 days in Kolkata with my parents and a budget of 3000 rupees. Plan my trip.",
+        "What vegetarian Bengali food should I try?",
+        "How do I go from Howrah Station to Victoria Memorial?",
+        "Which places are good for kids on a Sunday?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "This site uses local specialists only."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "kolkata_concierge",
+    "front_man": "concierge_coordinator",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#b5651d"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "kolkata_concierge",
+        "front_man": "concierge_coordinator",
+        "aliases": [
+          "kolkata_concierge",
+          "concierge_coordinator"
+        ],
+        "url": "kolkata_concierge"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  }
+}
